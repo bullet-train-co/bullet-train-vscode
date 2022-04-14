@@ -10,14 +10,14 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:bullet-train-vscode.helloWorld"
+        "onCommand:bullet-train-vscode.resolveAndOpenTextUnderCursor"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "bullet-train-vscode.helloWorld",
-				"title": "Hello World"
+				"command": "bullet-train-vscode.resolveAndOpenTextUnderCursor",
+				"title": "Bullet Train: Resolve and Open Text Under Cursor"
 			}
 		]
 	},
