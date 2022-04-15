@@ -24,7 +24,7 @@ export function resolveAndOpenTextUnderCursor() {
 export function ejectActiveFile() {
   const { activeTextEditor } = window
   const { workspaceFolders } = workspace
-  
+
   if (!activeTextEditor || !workspaceFolders) {
     return
   }
@@ -66,16 +66,41 @@ export function ejectActiveFile() {
     })
 }
 
+export async function resolveInteractive() {
+  let needle = await window.showInputBox({
+    prompt: "Paste a code symbol, file path, or HTML comment",
+    placeHolder: "code symbol, file path, or HTML comment"
+  })
+  if (!needle) {
+    return
+  }
+  const htmlMatches = needle.match(/<!-- (BEGIN|END) (.+) -->/)
+  if (htmlMatches) {
+    needle = htmlMatches[2]
+  }
+
+  execResolve([needle], (_err, stdout, _stderr) => {
+    const lines = stdout.split("\n")
+    const absolutePathIndex = lines.indexOf("Absolute path:")
+    if (absolutePathIndex) {
+      const resolvedPath = lines[absolutePathIndex + 1].trim()
+      openFile(resolvedPath)
+    } else {
+      window.showWarningMessage(`Could not find \`${needle}\` with bin/resolve`)
+    }
+  })
+}
+
 function execResolve(args: string[], callback: (err: ExecFileException | null, stdout: string, stderr: string) => void) {
   const { workspaceFolders } = workspace
   if (!workspaceFolders) {
     return
   }
-  
+
   const projectRoot = workspaceFolders[0].uri.path
   const cmd = path.join(projectRoot, 'bin', 'resolve')
 
-  execFile(cmd, args, {cwd: projectRoot}, (err, stdout, stderr) => {
+  execFile(cmd, args, { cwd: projectRoot }, (err, stdout, stderr) => {
     if (err) {
       window.showErrorMessage("Error running bin/resolve. Check the Developer Tools console for full details.")
       console.error("error running bin/resolve")
@@ -90,40 +115,40 @@ function execResolve(args: string[], callback: (err: ExecFileException | null, s
 
 function openFile(path: string) {
   workspace.openTextDocument(path).then((document) => {
-      window.showTextDocument(document)
+    window.showTextDocument(document)
   })
 }
 
 function selectedTextOrWordUnderCursor() {
-    const { activeTextEditor } = window
+  const { activeTextEditor } = window
 
-    // If there's no activeTextEditor, do nothing.
-    if (!activeTextEditor) {
-      return
-    }
-  
-    const { document, selection } = activeTextEditor
-    const { end, start } = selection
-    const isMultiLine = end.line !== start.line
-  
-    // If the user is trying to seek while having made a multiline selection, do nothing.
-    if (isMultiLine) {
-      return
-    }
-  
-    // If the beginning and end of selection are on different line or different characters
-    // that means the user is performing a selection search, otherwise, it means the user
-    // is making a whole word search
-    const isSelectionSearch = end.line !== start.line || end.character !== start.character
-  
-    // For selection search, our range is the selection itself. Otherwise, we use
-    // `document.getWordRangeAtPosition` to get the range of the word under the cursor
-    const wordAtCursorRange = isSelectionSearch ? selection : document.getWordRangeAtPosition(end)
-  
-    // If at this point, we don't have a word range, abort.
-    if (wordAtCursorRange === undefined) {
-      return
-    }
-  
-    return document.getText(wordAtCursorRange)
+  // If there's no activeTextEditor, do nothing.
+  if (!activeTextEditor) {
+    return
+  }
+
+  const { document, selection } = activeTextEditor
+  const { end, start } = selection
+  const isMultiLine = end.line !== start.line
+
+  // If the user is trying to seek while having made a multiline selection, do nothing.
+  if (isMultiLine) {
+    return
+  }
+
+  // If the beginning and end of selection are on different line or different characters
+  // that means the user is performing a selection search, otherwise, it means the user
+  // is making a whole word search
+  const isSelectionSearch = end.line !== start.line || end.character !== start.character
+
+  // For selection search, our range is the selection itself. Otherwise, we use
+  // `document.getWordRangeAtPosition` to get the range of the word under the cursor
+  const wordAtCursorRange = isSelectionSearch ? selection : document.getWordRangeAtPosition(end)
+
+  // If at this point, we don't have a word range, abort.
+  if (wordAtCursorRange === undefined) {
+    return
+  }
+
+  return document.getText(wordAtCursorRange)
 }

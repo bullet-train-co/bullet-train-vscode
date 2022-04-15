@@ -1,5 +1,5 @@
 {
-  "name": "bullet-train-vscode",
+	"name": "bullet-train-vscode",
 	"displayName": "Bullet Train",
 	"description": "Support for the Bullet Train Ruby on Rails Saas Framework",
 	"version": "0.0.1",
@@ -10,8 +10,9 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:bullet-train-vscode.resolveAndOpenTextUnderCursor",
-        "onCommand:bullet-train-vscode.ejectActiveFile"
+		"onCommand:bullet-train-vscode.resolveAndOpenTextUnderCursor",
+		"onCommand:bullet-train-vscode.ejectActiveFile",
+		"onCommand:bullet-train-vscode.resolveInteractive"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -23,6 +24,10 @@
 			{
 				"command": "bullet-train-vscode.ejectActiveFile",
 				"title": "Bullet Train: Eject Current File"
+			},
+			{
+				"command": "bullet-train-vscode.resolveInteractive",
+				"title": "Bullet Train: Resolve Interactively"
 			}
 		]
 	},
