@@ -10,7 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:bullet-train-vscode.resolveAndOpenTextUnderCursor"
+        "onCommand:bullet-train-vscode.resolveAndOpenTextUnderCursor",
+        "onCommand:bullet-train-vscode.ejectActiveFile"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -18,6 +19,10 @@
 			{
 				"command": "bullet-train-vscode.resolveAndOpenTextUnderCursor",
 				"title": "Bullet Train: Resolve and Open Text Under Cursor"
+			},
+			{
+				"command": "bullet-train-vscode.ejectActiveFile",
+				"title": "Bullet Train: Eject Current File"
 			}
 		]
 	},
