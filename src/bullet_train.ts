@@ -1,4 +1,4 @@
-import { window, workspace } from 'vscode'
+import { window, workspace, commands } from 'vscode'
 import { execFile, ExecFileException } from 'child_process'
 import * as path from 'path'
 
@@ -32,30 +32,38 @@ export function ejectActiveFile() {
   const activeFilePath = activeTextEditor.document.uri.path
   const projectRoot = workspaceFolders[0].uri.path
 
-  execResolve([activeFilePath, "--eject"], (_err, stdout, _stderr) => {
-    let ejectedPath: string | undefined
-    const ejectingPattern = /^Ejecting `([^`]+)` to `([^`]+)`$/
-    const alreadyEjectedPattern = /^Can't eject! `([^`]+)` already exists!/
+  window
+    .showInformationMessage("Are you sure you want to eject this file into your project?", "Yes", "No")
+    .then(answer => {
+      if (answer == "Yes") {
+        execResolve([activeFilePath, "--eject"], (_err, stdout, _stderr) => {
+          let ejectedPath: string | undefined
+          const ejectingPattern = /^Ejecting `([^`]+)` to `([^`]+)`$/
+          const alreadyEjectedPattern = /^Can't eject! `([^`]+)` already exists!/
 
-    stdout.split("\n").forEach(line => {
-      const ejectingMatches = line.match(ejectingPattern)
-      if (ejectingMatches) {
-        ejectedPath = ejectingMatches[2]
-      } else {
-        const alreadyEjectedMatches = line.match(alreadyEjectedPattern)
-        if (alreadyEjectedMatches) {
-          ejectedPath = alreadyEjectedMatches[1]
-        }
+          stdout.split("\n").forEach(line => {
+            const ejectingMatches = line.match(ejectingPattern)
+            if (ejectingMatches) {
+              ejectedPath = ejectingMatches[2]
+            } else {
+              const alreadyEjectedMatches = line.match(alreadyEjectedPattern)
+              if (alreadyEjectedMatches) {
+                ejectedPath = alreadyEjectedMatches[1]
+              }
+            }
+          })
+
+          if (ejectedPath) {
+            const absolutePath = path.join(projectRoot, ejectedPath)
+            commands.executeCommand('workbench.action.closeActiveEditor')
+            openFile(absolutePath)
+
+          } else {
+            window.showWarningMessage(`Unable to eject ${activeFilePath}`)
+          }
+        })
       }
     })
-
-    if (ejectedPath) {
-      const absolutePath = path.join(projectRoot, ejectedPath)
-      openFile(absolutePath)
-    } else {
-      window.showWarningMessage(`Unable to eject ${activeFilePath}`)
-    }
-  })
 }
 
 function execResolve(args: string[], callback: (err: ExecFileException | null, stdout: string, stderr: string) => void) {
