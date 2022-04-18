@@ -29,6 +29,22 @@
 				"command": "bullet-train-vscode.resolveInteractive",
 				"title": "Bullet Train: Resolve Interactively"
 			}
+		],
+		"keybindings": [
+			{
+				"command": "bullet-train-vscode.resolveAndOpenTextUnderCursor",
+				"key": "alt-r r",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "bullet-train-vscode.ejectActiveFile",
+				"key": "alt-r e",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "bullet-train-vscode.resolveInteractive",
+				"key": "alt-r i"
+			}
 		]
 	},
 	"scripts": {
