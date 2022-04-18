@@ -12,19 +12,22 @@ There are commands to access the `bin/resolve` script for inspecting and ejectin
 
 Highlight a code symbol like `Users::Base` or a view path like `shared/box` and run the "Resolve Text Under Cursor" command. This will open the file where the code is defined.
 
-Keyboard shortcut: `Alt+r r`
+Keyboard shortcut: `option + r r` (Mac)
+Keyboard shortcut: `alt + r r` (Windows/Linux)
 
 #### Eject Current File
 
 When viewing a framework-provided file, run the "Eject Current File" command to copy the file into your project. Then you can provide your own project-specific customizations.
 
-Keyboard shortcut: `Alt+r e`
+Keyboard shortcut: `option + r e` (Mac)
+Keyboard shortcut: `alt + r e` (Windows/Linux)
 
 #### Resolve Interactively
 
 Run the "Resolve Interactively" command to open a text box to resolve and open framework files. This is particularly useful for resolving view partials based on the the HTML comments that Bullet Train inserts in the page source.
 
-Keyboard shortcut: `Alt+r i`
+Keyboard shortcut: `option + r i` (Mac)
+Keyboard shortcut: `alt + r i` (Windows/Linux)
 
 ## Requirements
 
