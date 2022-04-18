@@ -4,6 +4,7 @@
 	"description": "Support for the Bullet Train Ruby on Rails Saas Framework",
 	"version": "1.0.1",
 	"icon": "images/icon.png",
+	"license": "SEE LICENSE IN LICENSE",
 	"repository": {
 		"url": "https://github.com/andrewculver/bullet-train-vscode"
 	},
