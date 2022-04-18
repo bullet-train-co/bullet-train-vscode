@@ -1,8 +1,17 @@
-# bullet-train-vscode README
+# Bullet Train for VS Code
 
-This is the README for your extension "bullet-train-vscode". After writing up a brief description, we recommend including the following sections.
+This extension provides quick access to [Bullet Train](https://bullettrain.co/) features from within VS Code
 
 ## Features
+
+There are commands to access the `bin/resolve` script for inspecting and ejecting code inside the framework gems.
+
+
+
+#### Resolve Text Under Cursor
+
+Highlight a code symbol like `Users::Base` and run this command to open the file containing the definition
+
 
 Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
 
@@ -14,22 +23,10 @@ For example if there is an image subfolder under your extension project workspac
 
 ## Requirements
 
+You'll need to be running the extension from within a Bullet Train project
+
 If you have any requirements or dependencies, add a section describing those and how to install and configure them.
 
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
 
 ## Release Notes
 
