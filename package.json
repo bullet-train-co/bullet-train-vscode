@@ -3,6 +3,9 @@
 	"displayName": "Bullet Train",
 	"description": "Support for the Bullet Train Ruby on Rails Saas Framework",
 	"version": "0.0.1",
+	"repository": {
+		"url": "https://github.com/andrewculver/bullet-train-vscode"
+	},
 	"engines": {
 		"vscode": "^1.66.0"
 	},
