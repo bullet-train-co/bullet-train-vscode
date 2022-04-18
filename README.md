@@ -30,11 +30,9 @@ Keyboard shortcut: `Alt+r i`
 
 You'll need to be running the extension from within a working Bullet Train project. Follow the [Getting Started](https://bullettrain.co/docs/getting-started) guide to get your app up and running.
 
-If you run into issues try running the `bin/resolve` script from the command line, as described in the [Bullet Train Docs](https://bullettrain.co/docs/indirection)
+If you run into issues try running the `bin/resolve` script from the command line as described in the [Bullet Train Docs](https://bullettrain.co/docs/indirection)
 
 ## Release Notes
-
-Users appreciate release notes as you update your extension.
 
 ### 1.0.0
 

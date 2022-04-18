@@ -19,7 +19,7 @@
 		"commands": [
 			{
 				"command": "bullet-train-vscode.resolveAndOpenTextUnderCursor",
-				"title": "Bullet Train: Resolve and Open Text Under Cursor"
+				"title": "Bullet Train: Resolve Text Under Cursor"
 			},
 			{
 				"command": "bullet-train-vscode.ejectActiveFile",
