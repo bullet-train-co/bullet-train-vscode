@@ -68,8 +68,8 @@ export function ejectActiveFile() {
 
 export async function resolveInteractive() {
   let needle = await window.showInputBox({
-    prompt: "Paste a code symbol, file path, or HTML comment",
-    placeHolder: "code symbol, file path, or HTML comment"
+    prompt: "Paste a code symbol, view path, or HTML comment",
+    placeHolder: "code symbol, view path, or HTML comment"
   })
   if (!needle) {
     return
