@@ -2,7 +2,7 @@
 	"name": "bullet-train-vscode",
 	"displayName": "Bullet Train",
 	"description": "Support for the Bullet Train Ruby on Rails Saas Framework",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"icon": "images/icon.png",
 	"license": "SEE LICENSE IN LICENSE",
 	"repository": {
